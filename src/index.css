@@ -1,0 +1,435 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --font-sans: var(--app-font-sans);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+}
+
+/* ═══════════════════════════════════════════
+   THEME 1: Warm Brown + Grey (default)
+═══════════════════════════════════════════ */
+:root,
+[data-theme="brown"] {
+  --background: 35 20% 96%;
+  --foreground: 25 30% 15%;
+  --border: 30 15% 82%;
+  --input: 30 15% 82%;
+  --ring: 25 55% 40%;
+  --card: 35 20% 99%;
+  --card-foreground: 25 30% 15%;
+  --muted: 30 15% 90%;
+  --muted-foreground: 25 10% 50%;
+  --primary: 25 55% 42%;
+  --primary-foreground: 35 20% 98%;
+  --secondary: 30 10% 85%;
+  --secondary-foreground: 25 30% 20%;
+  --accent: 25 45% 55%;
+  --accent-foreground: 35 20% 98%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+
+  --navbar-bg: 25 35% 22%;
+  --navbar-fg: 35 20% 96%;
+  --navbar-link-active-bg: 25 35% 35%;
+
+  --card-cbt-bg: 214 80% 56%;
+  --card-viva-bg: 262 60% 58%;
+  --card-practical-bg: 142 55% 42%;
+
+  --tag-bg: 30 40% 88%;
+  --tag-fg: 25 55% 30%;
+
+  --app-font-sans: 'Inter', system-ui, sans-serif;
+  --radius: 0.5rem;
+}
+
+/* ═══════════════════════════════════════════
+   THEME 2: Lavender + Soft Pink
+═══════════════════════════════════════════ */
+[data-theme="lavender"] {
+  --background: 270 25% 97%;
+  --foreground: 270 30% 18%;
+  --border: 270 20% 83%;
+  --input: 270 20% 83%;
+  --ring: 270 50% 55%;
+  --card: 270 25% 100%;
+  --card-foreground: 270 30% 18%;
+  --muted: 270 18% 90%;
+  --muted-foreground: 270 10% 52%;
+  --primary: 270 50% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 330 40% 88%;
+  --secondary-foreground: 270 30% 20%;
+  --accent: 330 55% 65%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+
+  --navbar-bg: 270 45% 30%;
+  --navbar-fg: 270 20% 96%;
+  --navbar-link-active-bg: 270 45% 42%;
+
+  --card-cbt-bg: 270 60% 62%;
+  --card-viva-bg: 330 55% 65%;
+  --card-practical-bg: 195 65% 50%;
+
+  --tag-bg: 270 35% 88%;
+  --tag-fg: 270 55% 38%;
+}
+
+/* ═══════════════════════════════════════════
+   THEME 3: Sage Green + Lilac
+═══════════════════════════════════════════ */
+[data-theme="sage"] {
+  --background: 140 15% 95%;
+  --foreground: 140 25% 15%;
+  --border: 140 12% 80%;
+  --input: 140 12% 80%;
+  --ring: 140 40% 42%;
+  --card: 140 15% 99%;
+  --card-foreground: 140 25% 15%;
+  --muted: 140 12% 88%;
+  --muted-foreground: 140 8% 50%;
+  --primary: 140 40% 42%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 280 30% 85%;
+  --secondary-foreground: 140 25% 15%;
+  --accent: 280 40% 60%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+
+  --navbar-bg: 140 35% 22%;
+  --navbar-fg: 140 15% 96%;
+  --navbar-link-active-bg: 140 35% 32%;
+
+  --card-cbt-bg: 195 60% 48%;
+  --card-viva-bg: 280 45% 58%;
+  --card-practical-bg: 140 48% 42%;
+
+  --tag-bg: 140 25% 85%;
+  --tag-fg: 140 45% 28%;
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: var(--app-font-sans);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════ */
+.navbar {
+  background-color: hsl(var(--navbar-bg));
+  color: hsl(var(--navbar-fg));
+}
+
+.navbar-brand {
+  color: hsl(var(--navbar-fg));
+}
+
+.nav-link {
+  color: hsl(var(--navbar-fg) / 0.75);
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover {
+  background-color: hsl(var(--navbar-fg) / 0.1);
+  color: hsl(var(--navbar-fg));
+}
+
+.nav-link-active {
+  background-color: hsl(var(--navbar-link-active-bg));
+  color: hsl(var(--navbar-fg)) !important;
+}
+
+/* ═══════════════════════════════════════════
+   STAT CARDS
+═══════════════════════════════════════════ */
+.stat-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  transition: box-shadow 0.2s;
+}
+.stat-card:hover { box-shadow: 0 2px 12px hsl(var(--primary) / 0.12); }
+.stat-card-alert { border-color: hsl(0 72% 51% / 0.4); background-color: hsl(0 72% 51% / 0.06); }
+
+/* ═══════════════════════════════════════════
+   EXAM CARDS
+═══════════════════════════════════════════ */
+.exam-card-btn {
+  color: #fff;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.exam-card-btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+.exam-card-btn:active { transform: scale(0.98); }
+.card-cbt  { background-color: hsl(var(--card-cbt-bg)); }
+.card-viva { background-color: hsl(var(--card-viva-bg)); }
+.card-practical { background-color: hsl(var(--card-practical-bg)); }
+
+/* ═══════════════════════════════════════════
+   SETTINGS / PERF / FOCUS CARDS
+═══════════════════════════════════════════ */
+.settings-card,
+.perf-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.focus-card {
+  background-color: hsl(var(--primary) / 0.08);
+  border: 1px solid hsl(var(--primary) / 0.25);
+  color: hsl(var(--foreground));
+}
+
+/* ═══════════════════════════════════════════
+   MCQ CARD
+═══════════════════════════════════════════ */
+.mcq-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid transparent;
+  font-size: 0.9375rem;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.option-default {
+  background-color: hsl(var(--muted));
+  border-color: transparent;
+  cursor: pointer;
+}
+.option-default:hover {
+  border-color: hsl(var(--primary));
+  background-color: hsl(var(--primary) / 0.06);
+}
+
+.option-selected {
+  background-color: hsl(var(--primary) / 0.1);
+  border-color: hsl(var(--primary));
+}
+
+.option-correct {
+  background-color: hsl(142 55% 42% / 0.12);
+  border-color: hsl(142 55% 42%);
+  color: hsl(142 55% 28%);
+  cursor: not-allowed;
+}
+
+.option-wrong {
+  background-color: hsl(0 72% 51% / 0.1);
+  border-color: hsl(0 72% 51%);
+  color: hsl(0 72% 38%);
+  cursor: not-allowed;
+}
+
+.option-neutral {
+  background-color: hsl(var(--muted));
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.option-label {
+  font-weight: 700;
+  min-width: 1.25rem;
+  color: hsl(var(--primary));
+}
+
+.explanation-box {
+  background-color: hsl(var(--primary) / 0.07);
+  border: 1px solid hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
+}
+
+/* ═══════════════════════════════════════════
+   TAG
+═══════════════════════════════════════════ */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: hsl(var(--tag-bg));
+  color: hsl(var(--tag-fg));
+}
+
+/* ═══════════════════════════════════════════
+   VIVA CARDS
+═══════════════════════════════════════════ */
+.viva-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.viva-feedback {
+  background-color: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+}
+
+.viva-followup {
+  background-color: hsl(var(--primary) / 0.05);
+  border: 1px solid hsl(var(--primary) / 0.2);
+}
+
+/* ═══════════════════════════════════════════
+   PRACTICAL
+═══════════════════════════════════════════ */
+.practical-case-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+}
+
+.practical-question {
+  background-color: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+}
+
+/* ═══════════════════════════════════════════
+   RESULTS
+═══════════════════════════════════════════ */
+.results-hero {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  color: hsl(var(--primary-foreground));
+}
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  background-color: transparent;
+  color: hsl(var(--foreground));
+  border: 2px solid hsl(var(--border));
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.btn-outline:hover { border-color: hsl(var(--primary)); background-color: hsl(var(--primary) / 0.05); }
+.btn-outline:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  background-color: hsl(142 55% 42%);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn-submit:hover { opacity: 0.9; }
+.btn-submit:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ═══════════════════════════════════════════
+   INPUT
+═══════════════════════════════════════════ */
+.input-area {
+  background-color: hsl(var(--card));
+  border: 2px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  outline: none;
+  font-family: var(--app-font-sans);
+  transition: border-color 0.15s;
+}
+.input-area:focus { border-color: hsl(var(--primary)); }
+.input-area::placeholder { color: hsl(var(--muted-foreground)); }
+
+/* ═══════════════════════════════════════════
+   SPINNER
+═══════════════════════════════════════════ */
+.spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid hsl(var(--border));
+  border-top-color: hsl(var(--primary));
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ═══════════════════════════════════════════
+   COUNTDOWN BANNER
+═══════════════════════════════════════════ */
+.countdown-banner {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 4px 20px hsl(var(--primary) / 0.3);
+}
+
+/* ═══════════════════════════════════════════
+   HIDE SCROLLBAR
+═══════════════════════════════════════════ */
+.hide-scrollbar { scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .btn-primary, .btn-outline, .btn-submit { width: 100%; justify-content: center; }
+}
